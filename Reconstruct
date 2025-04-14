@@ -1,0 +1,21 @@
+f = imread("D:\OneDrive\Desktop\ĐỒ ÁN TỐT NGHIỆP\ảnh X quang\phổi thường.png");
+figure('Name','ảnh gốc'); %1
+imshow(f);
+
+
+N = imnoise(f, 'salt & pepper', 0.05);
+
+figure('Name','ảnh nhiễu'); %2
+imshow(N);
+
+se = strel('disk',5);
+
+fe = imerode(N,se); %3
+
+fobr = imreconstruct(fe,N); %4
+
+fobrc = imcomplement(fobr); %5
+
+fobrce = imerode(fobrc,se); %6
+
+fobrcbr = imcomplement(imreconstruct(fobrce,fobrc)); %7
